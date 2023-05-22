@@ -13,10 +13,17 @@
     .d-flex {
         gap: 20px;
     }
+
+    .right {
+        position: absolute;
+        right: 0px;
+        width: 100px;
+
+    }
 </style>
 
 <head>
-    
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Blog Page</title>
@@ -27,12 +34,16 @@
 </head>
 
 <body>
-    <div>
+    <div class="right">
         <!-- <button type="submit" class="btn btn-primary">Login</button> -->
-        <a href="{% url 'login' %}" class="btn btn-success mt-4">LOGIN</a>
+        <a href="{% url 'login' %}" class="btn btn-primary mt-4 right">LOGIN</a>
     </div>
-
-
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <div class="container">
         {% for topic in alltopic %}
@@ -54,14 +65,14 @@
         {% for blog in obj %}
 
         <div class="card shadow col-3 ">
-            <img src="../static/assets/img/image.jpg" class="card-img-top" alt="...">
+            <img src="../static/assets/img/image.jpg" class="card-img-right" alt="...">
             <div class="card-body">
                 <h5 class="card-title"><a href="{% url 'blogdetail' blog.id %}">{{blog.blog_title}}</a></h5>
                 <p class="card-text">Author :{{blog.user.first_name}} {{blog.user.last_name}} posted on
 
 
                     {{blog.user.date_joined}}.</p>
-
+                    
 
             </div>
         </div>

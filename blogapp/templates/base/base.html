@@ -71,8 +71,8 @@
                             <button type="submit" class="dropdown-item">logout</button>
                             <form action="{% url 'logout' %}" method="post">
                                 {% csrf_token %}
-                                <button type="submit" class="dropdown-item">Signup</button>
-                        </form>
+                                <button type="submit" class="dropdown-item">Home</button>
+                            </form>
                     </div>
                 </li>
             </ul>
@@ -95,41 +95,41 @@
 
         <br><br> <br>
 
-            {% block content %}
+        {% block content %}
 
 
 
-            {% endblock content %}
+        {% endblock content %}
 
 
-            <!-- MDB -->
-            <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <!-- MDB -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 
-            <!--Datatable plugin JS library file -->
-            <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-            <script type="text/javascript"
-                src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
-            <script type="text/javascript">
-                let table = new DataTable('#myTable');
-            </script>
-            <!--Durga sir's Recommendation -->
-            <script src="{% static 'assets/js/jquery-3.5.1.min.js' %}"></script>
+        <!--Datatable plugin JS library file -->
+        <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+        <script type="text/javascript">
+            let table = new DataTable('#myTable');
+        </script>
+        <!--Durga sir's Recommendation -->
+        <script src="{% static 'assets/js/jquery-3.5.1.min.js' %}"></script>
 
-            <!-- Bootstrap Core JS -->
-            <script src="{% static 'assets/js/popper.min.js' %}"></script>
-            <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+        <!-- Bootstrap Core JS -->
+        <script src="{% static 'assets/js/popper.min.js' %}"></script>
+        <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
 
-            <!-- Slimscroll JS -->
-            <script src="{% static 'assets/js/jquery.slimscroll.min.js' %}"></script>
+        <!-- Slimscroll JS -->
+        <script src="{% static 'assets/js/jquery.slimscroll.min.js' %}"></script>
 
-            <!-- Chart JS -->
-            <script src="{% static 'assets/plugins/morris/morris.min.js' %}"></script>
-            <script src="{% static 'assets/plugins/raphael/raphael.min.js' %}"></script>
-            <script src="{% static 'assets/js/chart.js' %}"></script>
+        <!-- Chart JS -->
+        <script src="{% static 'assets/plugins/morris/morris.min.js' %}"></script>
+        <script src="{% static 'assets/plugins/raphael/raphael.min.js' %}"></script>
+        <script src="{% static 'assets/js/chart.js' %}"></script>
 
-            <!-- Custom JS -->
-            <script src="{% static 'assets/js/app.js' %}"></script>
-            <!--Durga sir's Recommendation -->
+        <!-- Custom JS -->
+        <script src="{% static 'assets/js/app.js' %}"></script>
+        <!--Durga sir's Recommendation -->
 
 </body>
 

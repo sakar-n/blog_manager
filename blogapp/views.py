@@ -8,12 +8,15 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .models import Blogmodels
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 
 # Create your views here.
 
 
+
 class Registeruser(View):
     def get(self, request):
+   
         fm = SignUpform()
         return render(request, "base/signup.html", {"form": fm})
 
@@ -28,7 +31,10 @@ class Registeruser(View):
 class Loginpage(View):
     def get(self, request):
         fm = AuthenticationForm()
-        return render(request, "base/login.html", {"form": fm})
+        if request.user.is_authenticated:
+            return redirect("userblog")
+        else:
+            return render(request, "base/login.html", {"form": fm})
 
     def post(self, request):
         form = AuthenticationForm(request, data=request.POST)
@@ -50,9 +56,12 @@ class Logoutuser(View):
         return redirect("home")
 
 
+
+
 class Userblog(LoginRequiredMixin, View):
     def get(self, request):
         form = Blogform(request.POST)
+  
         user = Blogmodels.objects.filter(user=request.user.id)
 
         return render(request, "base/userblog.html", {"form": form, "user": user})
@@ -120,11 +129,16 @@ class Editblog(LoginRequiredMixin,View):
 
 class Homepage(View):
     def get(self, request):
+        # obj = blogapp.models.Blogmodels.objects.order_by('-created_at')
         obj = Blogmodels.objects.select_related('user')[3:]
         alltopic= Blogmodels.objects.select_related('user')[:3]
+        paginator = Paginator(obj,5)
+        page_obj = paginator.get_page(obj)
+        
         context = {
         "obj":obj,
-        "alltopic":alltopic
+        "alltopic":alltopic,
+        "page_obj": page_obj
         }
         return render(request, "base/home.html", context)
     
