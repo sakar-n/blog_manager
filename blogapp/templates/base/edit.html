@@ -2,7 +2,7 @@
 
 {% extends 'base/base.html' %}
 {% block content %}
-
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -20,13 +20,48 @@
 </head>
 
 <body>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form}}
-        <button type="submit">Update</button>
+    <div class="card" style="width: 80rem;">
+        <div class="card-header">
+            Update Form
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <form action="#" method="post">
+                    <div class="form-group row">
+                        <label class="col-form-label col-md-2">Blog Tittle:</label>
+                        <div class="col-md-10">
+                            {% csrf_token %}
+
+                            {{ form.blog_title| add_class:'form-control-sm'}}
+
+
+
+
+                        </div>
+            </li>
+            <li class="list-group-item">
+                <div class="form-group row">
+                    <label class="col-form-label col-md-2">Blog description:
+                    </label>
+                    <div class="col-md-10">
+                        {{ form.blog_description| add_class:'form-control' }}
+                    </div>
+                </div>
+
+
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Update</button>
+
+
+                </div>
+    </div>
     </form>
+    </li>
 </body>
+</ul>
+
 {% endblock content %}
+</div>
 
 </html>
 <!-- this changes -->

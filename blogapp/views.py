@@ -143,7 +143,7 @@ class Blogdelete(LoginRequiredMixin,View):
         
         if request.user == obj.user:
             obj.delete()
-            messages.success(request,("item has been deleted"))
+            messages.success(request,("Blog has been deleted"))
             
             return redirect('userblog')
         else:
