@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<head>Full Blog </head>
+
+<body>
+
+    <h4 class="fst-italic">{{obj.blog_title}}</a></h4>
+    <h4 class="fst-italic">{{obj.blog_description}}</a></h4>
+
+
+    <li>Author : {{obj.user.first_name}} {{obj.user.last_name}}
+        Created at : {{obj.created_at}}
+
+    </li><br>
+
+    {% endblock content %}

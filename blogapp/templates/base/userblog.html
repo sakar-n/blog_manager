@@ -1,0 +1,108 @@
+{% extends 'base/base.html' %}
+{% block content %}
+{% load widget_tweaks %}
+<style>
+    .center {
+        margin: auto;
+        width: 90%;
+        border: 3px solid rgb(250, 253, 250);
+        padding: 30px;
+    }
+</style>
+
+{% if request.user.is_authenticated %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Welcome, {{request.user.first_name}}</h4>
+            </div>
+            <div class="card-body">
+                <div class="card-body">
+
+
+                    <form action="#" method="post">
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">Blog Tittle:</label>
+                            <div class="col-md-10">
+                                {% csrf_token %}
+
+                                {{ form.blog_title| add_class:'form-control-sm'| attr:'placeholder:Enter Title for Blog'}}
+
+
+
+
+                            </div>
+                            <br><br><br><br>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2">Blog description:
+                                </label>
+                                <div class="col-md-10">
+                                    {{ form.blog_description| add_class:'form-control'| attr:'placeholder:Write your Blog Here' }}
+                                </div>
+                            </div>
+
+
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Create</button>
+
+
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</form>
+
+
+</nav>
+
+
+
+
+
+
+
+{% endif %}
+
+<br><br>
+<div class="grid gap-3">
+
+    <h2>{{request.user.first_name}}'s Blog</h2>
+
+
+    <table id="myTable" class="display">
+        <thead>
+            <tr>
+                <th>SN</th>
+                <th>Blog Title</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        </tbody>
+        {% for id in user %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{id.blog_title }} </td>
+            <td><a href="{% url 'edit' id.id  %}"> Edit</a></td>
+            <td><a href="{% url 'delete' id.id %}">Delete</a><br></td>
+
+
+            {% endfor %}
+        </tr>
+
+
+    </table>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock content %}

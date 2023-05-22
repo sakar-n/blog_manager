@@ -1,0 +1,89 @@
+{% extends 'base/ubase.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<style>
+    .center {
+        margin: auto;
+        width: 90%;
+        border: 3px solid rgb(250, 253, 250);
+        padding: 30px;
+    }
+
+    .d-flex {
+        gap: 20px;
+    }
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Blog Page</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <div>
+        <!-- <button type="submit" class="btn btn-primary">Login</button> -->
+        <a href="{% url 'login' %}" class="btn btn-success mt-4">LOGIN</a>
+    </div>
+
+
+
+    <div class="container">
+        {% for topic in alltopic %}
+        <div class="card shadow" onclick="location.href='{% url 'blogdetail' topic.id %}'">
+            <div class="card-body text-center">
+                <h2 class="card-header"><a href="{% url 'blogdetail' topic.id %}">{{topic.blog_title}}</a></h5>
+                    <p class="card-text">Author :{{topic.user.first_name}} {{topic.user.last_name}} posted on
+
+
+                        {{topic.user.date_joined}}.</p>
+
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="container-fluid text-center"></div>
+    <div class="d-flex flex-wrap justify-content-center ">
+        {% for blog in obj %}
+
+        <div class="card shadow col-3 ">
+            <img src="../static/assets/img/image.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title"><a href="{% url 'blogdetail' blog.id %}">{{blog.blog_title}}</a></h5>
+                <p class="card-text">Author :{{blog.user.first_name}} {{blog.user.last_name}} posted on
+
+
+                    {{blog.user.date_joined}}.</p>
+
+
+            </div>
+        </div>
+        {% endfor%}
+        <br>
+
+    </div>
+    </div>
+
+
+
+
+
+
+    </div>
+
+
+    </div>
+    </div>
+    </div>
+
+
+
+
+</body>
+{% endblock content%}

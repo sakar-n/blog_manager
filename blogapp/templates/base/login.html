@@ -1,0 +1,58 @@
+{% extends 'base/ubase.html' %}
+{% block content %}
+
+<style>
+    .center {
+        margin: auto;
+        width: 90%;
+        border: 3px solid rgb(250, 253, 250);
+        padding: 30px;
+    }
+</style>
+
+
+
+<div class="account-box">
+    <div class="account-wrapper">
+        <h3 class="account-title">Login</h3>
+        <p class="account-subtitle">Access to our dashboard</p>
+
+        <!-- Account Form -->
+        <form action="" method="post">
+            <div class="form-group">
+                <div class="mb-3" class="form-control" type="text">
+
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                </div>
+
+                <div class="col-auto">
+                    <a class="text-muted" href="forgot-password.html">
+                        Forgot password?
+                    </a>
+                </div>
+            </div>
+
+    </div>
+    <div class="form-group text-center">
+        <button class="btn btn-success" type="submit" value="login">Login</button>
+    </div>
+    <div class="account-footer">
+
+    </div>
+    </form>
+    <div class="center">
+        <p>Don't have an account yet? <a href="{% url 'signup' %}">Register</a></p>
+    </div>
+    <!-- /Account Form -->
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+{% endblock content %}

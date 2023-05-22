@@ -1,0 +1,35 @@
+{% extends %}
+<!DOCTYPE html>
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Blog Page</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    {% for id in obj %}
+    <h4><a href="http://127.0.0.1:8000/blogdetail/">{{id.blog_title}}</h4></a>
+    <li>{{id.blog_description}}</li>
+
+
+    {% endfor%}
+    <div>
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</body>
+
+</html>

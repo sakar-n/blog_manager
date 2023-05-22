@@ -1,0 +1,95 @@
+<style>
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:hover {
+        color: blue;
+    }
+
+    body {
+        background-color: beige;
+    }
+</style>
+
+<!-- side bar-->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-inner slimscroll">
+        <div id="sidebar-menu" class="sidebar-menu">
+            <ul>
+                <li class="menu-title">
+                    <span>Main</span>
+                </li>
+                <li class="submenu">
+                    <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span
+                            class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a class="active" href="www.example.com">Admin Dashboard</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-title">
+                    <span>Employees</span>
+                </li>
+                <li class="submenu">
+                    <a href="#" class="noti-dot"><i class="la la-user"></i> <span> Employees</span> <span
+                            class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a href="www.example.com"> Add Employees</a></li>
+                    </ul>
+                </li>
+                <!-- <li>
+                                <a href="clients.html"><i class="la la-users"></i> <span>Clients</span></a>
+                            </li> -->
+                <li class="submenu">
+                    <a href="#"><i class="la la-rocket"></i> <span> Projects</span> <span class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a href="www.example.com">Projects</a></li>
+                        <li><a href="www.example.com">Project Request</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="www.example.com"><i class="la la-ticket"></i> <span>Tickets</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="sidebar">
+    <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
+</div>
+<div class="form-group">
+    <label>Username</label>
+    <input class="form-control" type="text">
+</div>
+<div class="form-group">
+    <div class="row">
+        <div class="col">
+            <label>Password</label>
+        </div>
+
+
+        <ul class="nav user-menu">
+
+
+
+
+            <li class="nav-item dropdown has-arrow main-drop">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <span class="user-img"><img src="../static/assets/img/profiles/avatar-21.jpg" alt="">
+                        <span class="status online"></span></span>
+                    <span>{{ companyname }}</span>
+                </a>
+                <div class="dropdown-menu">
+
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="dropdown-item">logout</button>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="dropdown-item">Signup</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
