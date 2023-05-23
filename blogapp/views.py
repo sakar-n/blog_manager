@@ -69,7 +69,7 @@ class Userblog(LoginRequiredMixin, View):
     
 
     def post(self, request):
-        form = Blogform(request.POST)
+        form = Blogform(request.POST, request.FILES)
         user = Blogmodels.objects.filter(user=request.user.id)
 
         if form.is_valid():
@@ -129,16 +129,17 @@ class Editblog(LoginRequiredMixin,View):
 
 class Homepage(View):
     def get(self, request):
-        # obj = blogapp.models.Blogmodels.objects.order_by('-created_at')
-        obj = Blogmodels.objects.select_related('user')[3:]
-        alltopic= Blogmodels.objects.select_related('user')[:3]
-        paginator = Paginator(obj,5)
-        page_obj = paginator.get_page(obj)
+        
+        obj = Blogmodels.objects.select_related('user')
+        
+        paginator = Paginator(obj,2)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         
         context = {
         "obj":obj,
-        "alltopic":alltopic,
         "page_obj": page_obj
+        
         }
         return render(request, "base/home.html", context)
     

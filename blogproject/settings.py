@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "blogapp",
     "crispy_forms",
     "widget_tweaks",
-    "ckeditor"
+    "ckeditor",
     "ckeditor_uploader",
 ]
 

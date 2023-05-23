@@ -33,7 +33,7 @@
 
 
     <!-- Common JavaScript files -->
-
+  
     </script>
 </head>
 
@@ -48,7 +48,7 @@
 
             <!-- Header Title -->
             <div class="page-title-box">
-                <h3>{{ companyname }} {{ user.first_name }}</h3>
+                <h3>Blog Management System</h3>
             </div>
             <!-- /Header Title -->
 
@@ -69,7 +69,7 @@
                         <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
                             <button type="submit" class="dropdown-item">logout</button>
-                            <form action="{% url 'logout' %}" method="post">
+                            <form action="{% url 'home' %}">
                                 {% csrf_token %}
                                 <button type="submit" class="dropdown-item">Home</button>
                             </form>
@@ -78,16 +78,7 @@
             </ul>
             <!-- /Header Menu -->
 
-            <!-- Mobile Menu -->
-            <div class="dropdown mobile-user-menu">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                        class="fa fa-ellipsis-v"></i></a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="www.example.com">Settings</a>
-                    <a class="dropdown-item" href="{% url 'logout'%}">Logout</a>
-                </div>
-            </div>
-            <!-- /Mobile Menu -->
+
 
         </div>
         <!-- /Header -->
@@ -99,9 +90,9 @@
 
 
 
+
+
         {% endblock content %}
-
-
         <!-- MDB -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 

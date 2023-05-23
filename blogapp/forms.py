@@ -31,4 +31,4 @@ class Blogform(forms.ModelForm):
 
       class Meta:
         model = Blogmodels
-        fields = ["blog_title", "blog_description"]
+        fields = ["blog_title", "blog_description", "image"]

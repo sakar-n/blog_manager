@@ -1,13 +1,24 @@
-{% extends 'base/ubase.html' %}
+{% extends 'base/base.html' %}
 {% block content %}
-<!DOCTYPE html>
-<html>
+{% load static %}
+
 <style>
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .card-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
     .center {
         margin: auto;
-        width: 90%;
-        border: 3px solid rgb(250, 253, 250);
-        padding: 30px;
+        width: 120%;
+        padding: 20px;
+
     }
 
     .d-flex {
@@ -20,82 +31,119 @@
         width: 100px;
 
     }
+
+    .custom-card-title {
+        font-size: 62px;
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: flex-end;
+
+        align-items: flex-end;
+        position: fixed;
+
+        width: 100%;
+        padding: 20px;
+        color: #4b8add;
+    }
+
+
+    .pagination {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pagination .page-link {
+        margin: 0 5px;
+    }
+
+    .centerr {
+        padding: 30px 0;
+
+        text-align: center;
+
+    }
+
+    h1 {
+        font-size: 40px;
+
+
+        color: #4b8add;
+    }
 </style>
 
-<head>
+<a href="{% url 'login' %}" class="btn btn-primary mt-4 right">LOGIN</a>
+<br><br><br>
+<br>
+<div class="card-container">
+    <div class="center">
+        <div class="card" style="width: 76rem;">
+            <div class=" card-body">
+                <h1>NITV</h1>
+            </div>
+        </div>
+    </div>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Blog Page</title>
-
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
-</head>
+</div>
 
 <body>
-    <div class="right">
-        <!-- <button type="submit" class="btn btn-primary">Login</button> -->
-        <a href="{% url 'login' %}" class="btn btn-primary mt-4 right">LOGIN</a>
-    </div>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
 
-    <div class="container">
-        {% for topic in alltopic %}
-        <div class="card shadow" onclick="location.href='{% url 'blogdetail' topic.id %}'">
-            <div class="card-body text-center">
-                <h2 class="card-header"><a href="{% url 'blogdetail' topic.id %}">{{topic.blog_title}}</a></h5>
-                    <p class="card-text">Author :{{topic.user.first_name}} {{topic.user.last_name}} posted on
+    <div class="container-fluid "></div>
+    <div class="d-flex flex-wrap justify-content-start">
+        {% for blog in page_obj %}
+        <div class="clearfix">
+            <div class="center">
+                <div class="card shadow col-48 col-md-12 col-lg-8 mb-8">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body d-flex flex-column h-100">
+                                <h5 class="card-title custom-card-title"><a
+                                        href="{% url 'blogdetail' blog.id %}">{{blog.blog_title}}</a>
+                                </h5>
 
-
-                        {{topic.user.date_joined}}.</p>
+                                <div class="mt-auto">
+                                    <p class="card-text">Author :{{blog.user.first_name}} {{blog.user.last_name}} posted
+                                        on
 
 
+                                        {{blog.user.date_joined}}.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="{{ blog.image.url }}" class="card-img-right" alt="..."
+                                style="width: 500px; height: 400px;">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        {% endfor %}
     </div>
-    <div class="container-fluid text-center"></div>
-    <div class="d-flex flex-wrap justify-content-center ">
-        {% for blog in obj %}
+    </div>
 
-        <div class="card shadow col-3 ">
-            <img src="../static/assets/img/image.jpg" class="card-img-right" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"><a href="{% url 'blogdetail' blog.id %}">{{blog.blog_title}}</a></h5>
-                <p class="card-text">Author :{{blog.user.first_name}} {{blog.user.last_name}} posted on
+    {% endfor%}
 
-
-                    {{blog.user.date_joined}}.</p>
-                    
-
+    <br><br>
+    <div class="container p-3  mb-5 bg-dark shadow">
+        <div class="d-flex  justify-content-center nowrap text-center">
+            {% if page_obj.has_previous %}
+            <a class="flex-item btn btn-info" href="?page=1">first</a>
+            <a class="flex-item btn btn-info" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a class="flex-item btn btn-primary" href="?page=1">1</a>
+                <a class="flex-item btn btn-primary " href="?page=2">2</a>
+                <a class="flex-item btn btn-primary " href="?page=3">3</a>
             </div>
+
+            {% if page_obj.has_next %}
+            <a class="flex-item btn btn-info" href="?page={{ page_obj.next_page_number }}">next</a>
+            <a class="flex-item btn btn-info" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
         </div>
-        {% endfor%}
-        <br>
-
     </div>
-    </div>
-
-
-
-
-
-
-    </div>
-
-
-    </div>
-    </div>
-    </div>
-
-
-
 
 </body>
 {% endblock content%}

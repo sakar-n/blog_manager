@@ -6,7 +6,7 @@
 <body>
 
     <h4 class="fst-italic">{{obj.blog_title}}</a></h4>
-    <h4 class="fst-italic">{{obj.blog_description}}</a></h4>
+    <h4 class="fst-italic">{{obj.blog_description|safe}}</a></h4>
 
 
     <li>Author : {{obj.user.first_name}} {{obj.user.last_name}}

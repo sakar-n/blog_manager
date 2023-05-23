@@ -72,16 +72,17 @@
             <!-- Header Menu -->
 
             <!-- /Header Menu -->
-
+            {% if request.user.is_authenticated %}
             <!-- Mobile Menu -->
             <div class="dropdown mobile-user-menu">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                        class="fa fa-ellipsis-v"></i></a>
+                <!-- <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
+                        class="fa fa-ellipsis-v"></i></a> -->
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="www.example.com">Settings</a>
                     <a class="dropdown-item" href="{% url 'logout'%}">Logout</a>
                 </div>
             </div>
+            {% endif %}
             <!-- /Mobile Menu -->
 
         </div>

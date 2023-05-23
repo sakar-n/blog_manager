@@ -27,7 +27,7 @@
                 <div class="card-body">
 
 
-                    <form action="#" method="post">
+                    <form action="#" method="post" enctype="multipart/form-data">
                         <div class="form-group row">
                             <label class="col-form-label col-md-2">Blog Tittle:</label>
                             <div class="col-md-10">
@@ -45,25 +45,34 @@
                                 <label class="col-form-label col-md-2">Blog description:
                                 </label>
                                 <div class="col-md-10">
+                                    {{form.media }}
                                     {{ form.blog_description| add_class:'form-control'| attr:'placeholder:Write your Blog Here' }}
+
                                 </div>
-                            </div>
+
+                                <div>
+                                    <label for="formFileLg" class="form-label">Choose Image </label>
+                                    <input class="form-control form-control-lg" id="formFileLg" type="file" name="image">
+                                    <br><br><br>
 
 
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Create</button>
 
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">Create</button>
 
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 </div>
 </form>
+
 
 
 </nav>
@@ -110,4 +119,6 @@
 </div>
 </div>
 
-{% endblock content %}
+
+
+  {% endblock content %}
