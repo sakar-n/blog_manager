@@ -1,4 +1,4 @@
-{% extends 'base/uubase.html' %}
+{% extends 'base/uuubase.html' %}
 {% block content %}
 {% load static %}
 
@@ -72,55 +72,61 @@
 
         color: #4b8add;
     }
+
     .main {
-  text-align: justify;
+        text-align: justify;
     }
+
     .ex1 {
-  
-  padding-right: 10px;
-}
+
+        padding-right: 10px;
+    }
 </style>
-
-<div class="ex1">
-<a href="{% url 'login' %}" class="btn btn-primary mt-4 right">LOGIN</a><br><br>
-
-<a href="{% url 'signup' %}" class="btn btn-primary mt-4 right">Register</a>
+{% if user.is_authenticated %}
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary mt-4 right">logout</button>
+{% else %}     
+    <a href="{% url 'login' %}" class="btn btn-primary mt-4 right">LOGIN</a><br><br>
+    <a href="{% url 'signup' %}" class="btn btn-primary mt-4 right">Register</a>
+    </div>
 </div>
-
+{% endif %}
 <div class="card-container">
     <div class="center">
-        <div class="card" style="width: 71rem; height: 7rem;">
+        <div class="card" style="width: 63rem; height: 7rem;">
             <div class="main">
-            <div class=" card-body">
-                <h1>NITV</h1><br>
+                <div class=" card-body">
+                    <h1>NITV</h1><br>
                     <div class="d-flex  justify-content-end ">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                        {% if page_obj.has_previous %}
-                        <a class="flex-item btn btn-info" href="?page=1">first</a>
-                        <a class="flex-item btn btn-info" href="?page={{ page_obj.previous_page_number }}">previous</a>
-                        {% endif %}
-                        
+                            {% if page_obj.has_previous %}
+                            <a class="flex-item btn btn-info" href="?page=1">first</a>
+                            <a class="flex-item btn btn-info"
+                                href="?page={{ page_obj.previous_page_number }}">previous</a>
+                            {% endif %}
+
                             <a class="flex-item btn btn-primary" href="?page=1">1</a>
                             <a class="flex-item btn btn-primary " href="?page=2">2</a>
                             <a class="flex-item btn btn-primary " href="?page=3">3</a>
-                        
 
-                        {% if page_obj.has_next %}
-                        <a class="flex-item btn btn-info" href="?page={{ page_obj.next_page_number }}">next</a>
-                        <a class="flex-item btn btn-info" href="?page={{ page_obj.paginator.num_pages }}">last
-                            &raquo;</a><br><br>
-                        {% endif %}
+
+                            {% if page_obj.has_next %}
+                            <a class="flex-item btn btn-info" href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a class="flex-item btn btn-info" href="?page={{ page_obj.paginator.num_pages }}">last
+                                &raquo;</a><br><br>
+                            {% endif %}
                         </div>
-                        
+
                     </div>
                 </div>
-                
-            </div>        
+
             </div>
         </div>
-
-
     </div>
+
+
+</div>
 
 
 

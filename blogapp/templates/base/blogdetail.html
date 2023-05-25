@@ -17,8 +17,8 @@
             <img class="card-img-top" src="{{ obj.image.url }}" style="width: 100%; height: 400px;"
                 alt="Card image cap">
             <div class="card-body">
-                <h5 class="card-title">{{obj.blog_title}}</h5>
-                <p class="card-text">{{obj.blog_description|safe}}</p>
+                <h5 class="card-title" style="font-size:40px;">{{obj.blog_title}}</h5>
+                <p class="card-text"><i>{{obj.blog_description|safe}}</i></p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Author : {{obj.user.first_name}} {{obj.user.last_name}}
