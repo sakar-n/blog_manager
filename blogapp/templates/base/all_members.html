@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+  Blogapp
+{% endblock %}
+
+
+{% block content %}
+  <div class="mycard">
+    <h1>Members</h1>
+    <ul>
+      {% for x in mymembers %}
+        <li onclick="window.location = 'details/{{ x.slug }}'">{{ x.blog_title }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

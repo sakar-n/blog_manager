@@ -1,0 +1,66 @@
+{% extends 'base/base.html' %}
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Welcome, {{request.user.first_name}}</h4>
+            </div>
+
+            <div class="card-body">
+                <div class="card-body">
+
+
+                    <form action="#" method="post" enctype="multipart/form-data">
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">Blog Tittle:</label>
+                            <div class="col-md-10">
+                                {% csrf_token %}
+
+                                {{ form.blog_title| add_class:'form-control-sm'| attr:'placeholder:Enter Title for Blog'}}
+
+
+
+
+                            </div>
+                            <br><br><br><br>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2">Blog description:
+                                </label>
+                                <div class="col-md-10">
+                                    {{form.media }}
+                                    {{ form.blog_description| add_class:'form-control'| attr:'placeholder:Write your Blog Here' }}
+
+                                </div>
+
+                                <div>
+                                    <label for="formFileLg" class="form-label">Choose Image </label>
+                                    <input class="form-control form-control-lg" id="formFileLg" type="file"
+                                        name="image">
+                                    <br><br><br>
+
+
+
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" href="{% url 'userblog' %}" type="submit">Create</button>  
+                                    </div>
+                                    <div class="col-auto float-right ml-auto">
+                                        <a type="action" onclick="window.location.href={% url 'userblog' %}" class="btn btn-primary"> Go back</a>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+</div>
+</form>
+
+{% endblock content %}

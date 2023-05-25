@@ -9,6 +9,10 @@ from django.contrib import messages
 from .models import Blogmodels
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from django.urls import reverse_lazy
+# from django.contrib.auth.views import PasswordResetView
+# from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.views import LoginView,PasswordChangeView,PasswordResetView,PasswordResetCompleteView,PasswordResetConfirmView,PasswordResetDoneView
 
 # Create your views here.
 
@@ -24,7 +28,7 @@ class Registeruser(View):
         fm = SignUpform(request.POST)
         if fm.is_valid():
             fm.save()
-            return redirect("signup")
+            return redirect("login")
         return render(request, "base/signup.html", {"form": fm})
 
 
@@ -110,6 +114,7 @@ class Editblog(LoginRequiredMixin,View):
         
         
         blog = get_object_or_404(Blogmodels, id=id)
+        print(blog)
         form = Blogform(request.POST, instance=blog)
         user = request.user.id
 
@@ -120,7 +125,7 @@ class Editblog(LoginRequiredMixin,View):
             return redirect("/userblog")
 
         else:
-            messages.error(request, "You are not authorized to delete this task.")
+            messages.error(request, "You are not authorized to edit this task.")
             return redirect("/userblog")
             
 
@@ -167,4 +172,38 @@ class Blogdelete(LoginRequiredMixin,View):
     
 
 
+class Createblog(LoginRequiredMixin, View):
+    def get(self, request):
+        form = Blogform(request.POST)
+  
+        user = Blogmodels.objects.filter(user=request.user.id)
+
+        return render(request, "base/create.html", {"form": form, "user": user})
+    
+    
+
+    def post(self, request):
+        form = Blogform(request.POST, request.FILES)
+        user = Blogmodels.objects.filter(user=request.user.id)
+
+        if form.is_valid():
+            new_blog = form.save(commit=False)
+
+            existing_title = Blogmodels.objects.filter(
+                blog_title=new_blog.blog_title, user=request.user.id
+            )
+
+            if existing_title.exists():
+                messages.error(
+                    request, "Title already exists choose another title for your blog"
+                )
+            else:
+                new_blog.user = request.user
+                new_blog.save()
+                messages.success(request, "Blog has been added.")
+            return redirect("create")
+        else:
+            messages.error(request, "Form is not valid.")
+
+            return render(request, "base/userblog.html", {"form": form, "user": user})
 

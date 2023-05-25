@@ -33,7 +33,7 @@
 
 
     <!-- Common JavaScript files -->
-  
+
     </script>
 </head>
 
@@ -53,6 +53,7 @@
             <!-- /Header Title -->
 
             <!-- Header Menu -->
+
             <ul class="nav user-menu">
 
 
@@ -62,8 +63,9 @@
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <span class="user-img"><img src="../static/assets/img/profiles/avatar-21.jpg" alt="">
                             <span class="status online"></span></span>
-                        <span>{{ companyname }}</span>
+                       
                     </a>
+
                     <div class="dropdown-menu">
 
                         <form action="{% url 'logout' %}" method="post">
@@ -73,9 +75,11 @@
                                 {% csrf_token %}
                                 <button type="submit" class="dropdown-item">Home</button>
                             </form>
+
                     </div>
                 </li>
             </ul>
+
             <!-- /Header Menu -->
 
 

@@ -135,5 +135,22 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
+
 #ckeditor upload path
 CKEDITOR_UPLOAD_PATH="uploads/"
+
+
+LOGIN_URL = 'login'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = 'cc90332146e287'
+EMAIL_HOST_PASSWORD = '477b0a2ccfa513'
+EMAIL_PORT = '2525'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = '587'
+# EMAIL_HOST_USER = 'rakasalaurin10@gmail.com'
+# EMAIL_HOST_PASSWORD = 'Sakar@18209'

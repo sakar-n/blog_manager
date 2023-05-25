@@ -1,0 +1,24 @@
+{% load i18n %}{% autoescape off %}
+<div class="container">
+    <h2>
+        {% blocktrans %}You receiving this email because you requested a password reset for your user account at {{ site_name }}.{% endblocktrans %}
+    
+    </h2>
+   <p>
+    {% trans "Please go to the following page and choose a new password:" %}
+   </p> 
+    {% block reset_link %}
+    <a href="">{{ protocol}}://{{ domain }}{% url 'reset_password_confirm' uidb64=uid token=token %}</a>
+    {% endblock %}
+    
+    
+    <div class="other">
+ 
+        {% trans "Thanks for using our site!" %}
+    
+        {% blocktrans %}The NITV POST team{% endblocktrans %}
+        
+        {% endautoescape %}
+    </div>
+   
+</div>
