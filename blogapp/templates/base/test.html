@@ -116,4 +116,49 @@
             path('reset/<uidb64>/<token>',auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),name="reset_password_confirm"),
             path('reset/done/',auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),name="password_reset_complete"),   
         ]
-        
+        html code:
+
+<div class="container">
+  <div class="text-container">
+    <h2>Title</h2>
+    <p>Description</p>
+  </div>
+  <div class="image-container">
+    <img src="image.jpg" alt="Image Description">
+  </div>
+</div>
+
+
+
+css style
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.text-container {
+  flex: 1 1 100%;
+  padding: 20px;
+}
+
+.image-container {
+  flex: 1 1 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .text-container {
+    flex: 1 1 50%;
+  }
+ 
+  .image-container {
+    flex: 1 1 50%;
+  }
+}

@@ -92,12 +92,14 @@
     </div>
 </div>
 {% endif %}
+
+
 <div class="card-container">
     <div class="center">
         <div class="card" style="width: 63rem; height: 7rem;">
             <div class="main">
                 <div class=" card-body">
-                    <h1>NITV</h1><br>
+                    <h1>BLOGS</h1><br>
                     <div class="d-flex  justify-content-end ">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             {% if page_obj.has_previous %}
@@ -126,17 +128,17 @@
     </div>
 
 
-</div>
 
+</div>
 
 
 
 <body>
 
-    <div class="container-fluid "></div>
+    <div class="container-fluid ">
     <div class="d-flex flex-wrap justify-content-start">
         {% for blog in page_obj %}
-        <div class="clearfix">
+         <div class="clearfix">
             <div class="center">
                 <div class="card shadow col-48 col-md-12 col-lg-8 mb-8">
                     <div class="row g-0">
@@ -158,7 +160,7 @@
                         </div>
                         <div class="col-md-4">
                             <img src="{{ blog.image.url }}" class="card-img-right" alt="..."
-                                style="width: 100%; height: 400px;">
+                                style="width: 100%; height: 100%;">
                         </div>
                     </div>
                 </div>
@@ -176,3 +178,5 @@
 
 </body>
 {% endblock content%}
+
+
