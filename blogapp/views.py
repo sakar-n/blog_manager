@@ -135,7 +135,7 @@ class Editblog(LoginRequiredMixin,View):
 class Homepage(View):
     def get(self, request):
         
-        obj = Blogmodels.objects.select_related('user')
+        obj = Blogmodels.objects.all()
         
         paginator = Paginator(obj,2)
         page_number = request.GET.get('page')
@@ -150,8 +150,8 @@ class Homepage(View):
     
 
 class Blogdetail(View):
-    def get(self, request, pk):
-        obj = get_object_or_404(Blogmodels, pk=pk)
+    def get(self,request, slug):
+        obj = get_object_or_404(Blogmodels, slug=slug)
         context = {"obj": obj}
         return render(request, "base/blogdetail.html", context)
 
@@ -201,7 +201,7 @@ class Createblog(LoginRequiredMixin, View):
                 new_blog.user = request.user
                 new_blog.save()
                 messages.success(request, "Blog has been added.")
-            return redirect("create")
+            return redirect("userblog")
         else:
             messages.error(request, "Form is not valid.")
 
