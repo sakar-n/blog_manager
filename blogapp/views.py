@@ -36,7 +36,7 @@ class Registeruser(View):
 
 
 class Loginpage(View):
-    @method_decorator(csrf_exempt)
+   
     def get(self, request):
         fm = AuthenticationForm()
         if request.user.is_authenticated:
