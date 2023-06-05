@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpform, Blogform
 from django.views import View
-
+from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .models import Blogmodels
@@ -16,7 +16,7 @@ from django.contrib.auth.views import LoginView,PasswordChangeView,PasswordReset
 # Create your views here.
 
 
-
+@csrf_protect
 class Registeruser(View):
     def get(self, request):
    
