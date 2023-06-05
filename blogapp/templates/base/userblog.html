@@ -8,13 +8,29 @@
         border: 3px solid rgb(250, 253, 250);
         padding: 30px;
     }
+    .container{
+        text-align: center;
+    }
 </style>
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('.message').fadeOut('slow');
+        }, 5000);
+
+        $(document).on('click', '.del-msg', function() {
+            $(this).parent().remove();
+        });
+    });
+</script>
+
 
 
 {% if request.user.is_authenticated %}
 {% for message in messages %}
-<div> {{ message }} </div>
-
+<div class= "container">
+     {{ message }} </div>
+    
 {% endfor %}
 <div class="col-auto float-right ml-auto">
     <a type="action" href="{% url 'create' %}" class="btn add-btn"><i class="fa fa-plus"></i> Create Project</a>

@@ -4,6 +4,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login, logout
 from .forms import SignUpform, Blogform
 from django.views import View
+
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from .models import Blogmodels
@@ -157,6 +158,7 @@ class Blogdelete(LoginRequiredMixin,View):
     def get(self, request, id):
         obj = get_object_or_404(Blogmodels, id =id)
         context = {"obj": obj}
+        
         user =request.user.id
         
         if request.user == obj.user:
