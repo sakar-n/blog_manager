@@ -124,7 +124,7 @@ USE_TZ = True
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 STATIC_URL = 'static/'
-STATIC_ROOT = '/var/www/static/assets'
+STATIC_ROOT = '\blogproject\static\assets'
 STATICFILES_DIRS =(
     os.path.join(BASE_DIR, 'static'),
 )
