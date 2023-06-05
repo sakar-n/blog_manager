@@ -161,3 +161,8 @@ EMAIL_PORT = '2525'
 # EMAIL_PORT = '587'
 # EMAIL_HOST_USER = 'rakasalaurin10@gmail.com'
 # EMAIL_HOST_PASSWORD = 'Sakar@18209'
+CSRF_COOKIE_SECURE = False
+
+CSRF_TRUSTED_ORIGINS = ['https://blogmanager-production.up.railway.app']
+
+SESSION_COOKIE_SAMESITE = 'None'
