@@ -12,11 +12,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView,PasswordChangeView,PasswordResetView,PasswordResetCompleteView,PasswordResetConfirmView,PasswordResetDoneView
-
+from django.utils.decorators import method_decorator
 # Create your views here.
 
 
-@csrf_protect
+@method_decorator(csrf_protect, name='dispatch')
 class Registeruser(View):
     def get(self, request):
    
