@@ -81,6 +81,11 @@
 
         padding-right: 10px;
     }
+    .page-title-box{
+        background:red;
+        padding:10px;
+        color:white;
+    }
 </style>
 {% if user.is_authenticated %}
 <form action="{% url 'logout' %}" method="post">

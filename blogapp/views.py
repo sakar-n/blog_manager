@@ -12,6 +12,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView,PasswordChangeView,PasswordResetView,PasswordResetCompleteView,PasswordResetConfirmView,PasswordResetDoneView
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
+
 
 # Create your views here.
 
@@ -32,13 +36,14 @@ class Registeruser(View):
 
 
 class Loginpage(View):
+    @method_decorator(csrf_exempt)
     def get(self, request):
         fm = AuthenticationForm()
         if request.user.is_authenticated:
             return redirect("userblog")
         else:
             return render(request, "base/login.html", {"form": fm})
-
+    @method_decorator(csrf_exempt)
     def post(self, request):
         form = AuthenticationForm(request, data=request.POST)
 
