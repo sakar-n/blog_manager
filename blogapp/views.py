@@ -31,6 +31,7 @@ class Registeruser(View):
         return render(request, "base/signup.html", {"form": fm})
 
 
+@method_decorator(csrf_protect, name='dispatch')
 class Loginpage(View):
     def get(self, request):
         fm = AuthenticationForm()

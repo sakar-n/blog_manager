@@ -165,4 +165,4 @@ CSRF_COOKIE_SECURE = False
 
 CSRF_TRUSTED_ORIGINS = ['https://blogmanager-production.up.railway.app']
 
-SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'Lax'
