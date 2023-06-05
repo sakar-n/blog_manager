@@ -29,7 +29,7 @@ class Registeruser(View):
             fm.save()
             return redirect("login")
         return render(request, "base/signup.html", {"form": fm})
-
+        
 
 @method_decorator(csrf_protect, name='dispatch')
 class Loginpage(View):

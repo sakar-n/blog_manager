@@ -1,7 +1,7 @@
 {% extends 'base/uuubase.html' %}
 {% block content %}
 {% load static %}
-
+{% load humanize %}
 <style>
     .clearfix::after {
         content: "";
@@ -157,9 +157,7 @@
                                     <p class="card-text">Author :{{blog.user.first_name}} {{blog.user.last_name}}
                                         posted
                                         on
-
-
-                                        {{blog.user.date_joined}}.</p>
+                                        {{blog.created_at|naturaltime}}.</p>
                                 </div>
                             </div>
                         </div>

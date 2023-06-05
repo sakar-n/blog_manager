@@ -15,3 +15,6 @@ class Blogmodels(models.Model):
 
     def __str__(self):
         return self.blog_title
+
+    class Meta:
+        ordering =["-created_at"]

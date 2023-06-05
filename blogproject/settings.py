@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     "ckeditor",
     "ckeditor_uploader",
     "gunicorn",
-    "whitenoise.runserver_nostatic"
+    "whitenoise.runserver_nostatic",
+    "django.contrib.humanize",
 ]
 
 MIDDLEWARE = [
