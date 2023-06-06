@@ -1,164 +1,290 @@
+{% extends 'base/uuubase.html' %}
+{% block content %}
+{% load static %}
+
 <style>
-    a {
-        text-decoration: none;
-        color: black;
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
     }
 
-    a:hover {
-        color: blue;
+    .card-container {
+        display: flex;
+        justify-content: space-between;
     }
 
-    body {
-        background-color: beige;
+    .center {
+        margin: auto;
+        width: 120%;
+        padding: 20px;
+
+    }
+
+    .d-flex {
+        gap: 20px;
+    }
+
+    .right {
+        position: absolute;
+        right: 0px;
+        width: 100px;
+
+    }
+
+    .custom-card-title {
+        font-size: 62px;
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: flex-end;
+
+        align-items: flex-end;
+        position: fixed;
+
+        width: 100%;
+        padding: 20px;
+        color: #4b8add;
+    }
+
+
+    .pagination {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pagination .page-link {
+        margin: 0 5px;
+    }
+
+    .centerr {
+        padding: 30px 0;
+
+        text-align: center;
+
+    }
+
+    h1 {
+        font-size: 70px;
+
+
+        color: #4b8add;
+    }
+
+    .main {
+        text-align: justify;
+    }
+
+    .ex1 {
+
+        padding-right: 10px;
     }
 </style>
-
-<!-- side bar-->
-<div class="sidebar" id="sidebar">
-    <div class="sidebar-inner slimscroll">
-        <div id="sidebar-menu" class="sidebar-menu">
-            <ul>
-                <li class="menu-title">
-                    <span>Main</span>
-                </li>
-                <li class="submenu">
-                    <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span
-                            class="menu-arrow"></span></a>
-                    <ul style="display: none;">
-                        <li><a class="active" href="www.example.com">Admin Dashboard</a></li>
-                    </ul>
-                </li>
-
-                <li class="menu-title">
-                    <span>Employees</span>
-                </li>
-                <li class="submenu">
-                    <a href="#" class="noti-dot"><i class="la la-user"></i> <span> Employees</span> <span
-                            class="menu-arrow"></span></a>
-                    <ul style="display: none;">
-                        <li><a href="www.example.com"> Add Employees</a></li>
-                    </ul>
-                </li>
-                <!-- <li>
-                                <a href="clients.html"><i class="la la-users"></i> <span>Clients</span></a>
-                            </li> -->
-                <li class="submenu">
-                    <a href="#"><i class="la la-rocket"></i> <span> Projects</span> <span class="menu-arrow"></span></a>
-                    <ul style="display: none;">
-                        <li><a href="www.example.com">Projects</a></li>
-                        <li><a href="www.example.com">Project Request</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="www.example.com"><i class="la la-ticket"></i> <span>Tickets</span></a>
-                </li>
-            </ul>
-        </div>
+{% if user.is_authenticated %}
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary mt-4 right">logout</button>
+{% else %}     
+    <a href="{% url 'login' %}" class="btn btn-primary mt-4 right">LOGIN</a><br><br>
+    <a href="{% url 'signup' %}" class="btn btn-primary mt-4 right">Register</a>
     </div>
 </div>
-<div class="sidebar">
-    <a id="mobile_btn" class="mobile_btn" href="#sidebar"><i class="fa fa-bars"></i></a>
-</div>
-<div class="form-group">
-    <label>Username</label>
-    <input class="form-control" type="text">
-</div>
-<div class="form-group">
-    <div class="row">
-        <div class="col">
-            <label>Password</label>
-        </div>
+{% endif %}
 
 
-        <ul class="nav user-menu">
+<div class="card-container">
+    <div class="center">
+        <div class="card" style="width: 63rem; height: 7rem;">
+            <div class="main">
+                <div class=" card-body">
+                    <h1>BLOGS</h1><br>
+                    <div class="d-flex  justify-content-end ">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            {% if page_obj.has_previous %}
+                            <a class="flex-item btn btn-info" href="?page=1">first</a>
+                            <a class="flex-item btn btn-info"
+                                href="?page={{ page_obj.previous_page_number }}">previous</a>
+                            {% endif %}
+
+                            <a class="flex-item btn btn-primary" href="?page=1">1</a>
+                            <a class="flex-item btn btn-primary " href="?page=2">2</a>
+                            <a class="flex-item btn btn-primary " href="?page=3">3</a>
 
 
+                            {% if page_obj.has_next %}
+                            <a class="flex-item btn btn-info" href="?page={{ page_obj.next_page_number }}">next</a>
+                            <a class="flex-item btn btn-info" href="?page={{ page_obj.paginator.num_pages }}">last
+                                &raquo;</a><br><br>
+                            {% endif %}
+                        </div>
 
-
-            <li class="nav-item dropdown has-arrow main-drop">
-                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                    <span class="user-img"><img src="../static/assets/img/profiles/avatar-21.jpg" alt="">
-                        <span class="status online"></span></span>
-                    <span>{{ companyname }}</span>
-                </a>
-                <div class="dropdown-menu">
-
-                   
-                    <form action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="dropdown-item">logout</button>
-                        <form action="{% url 'logout' %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="dropdown-item">Signup</button>
-                    </form>
+                    </div>
                 </div>
-            </li>
-        </ul>
-        path('', include('django.contrib.auth.urls')),path('', include('django.contrib.auth.urls')),path('', include('django.contrib.auth.urls')),from django.urls import path
-        from .views import blogList,blogDetail,blogCreate,updateBlog,userLoginView,userProfile,userRegister,deleteBlog,searchView,ChangePasswordView,categoryAdd,blogCategoryList
-        from django.contrib.auth import views as auth_views
-        
-        urlpatterns =[
-            path('', blogList, name="tasks"),
-            path('detail/<slug>', (blogDetail), name="detail"),
-            path('login/', userLoginView.as_view(), name="login-user"),
-            path('register/', userRegister, name="register-user"),
-            path('blog_create/', (blogCreate),name="create"),
-            path('update_blog/<int:id>',updateBlog, name="update"),
-            path('delete_blog/<int:id>',deleteBlog,name="delete"),
-            path('category_add',categoryAdd,name='category'),
-            path('category_view/',blogCategoryList,name='categorized-list'),   
-            path('profile/<int:id>', userProfile,name="profile"),
-            path('search', searchView, name="search"),
-            path('password/', ChangePasswordView.as_view(), name="one"),
-            path('reset_password/',auth_views.PasswordResetView.as_view(template_name='password_reset_form.html',html_email_template_name='reset_email.html'),name="reset_password"),
-            path('password_reset/done/',auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'),name="reset_password_done"),
-            path('reset/<uidb64>/<token>',auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),name="reset_password_confirm"),
-            path('reset/done/',auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),name="password_reset_complete"),   
-        ]
-        html code:
 
-<div class="container">
-  <div class="text-container">
-    <h2>Title</h2>
-    <p>Description</p>
-  </div>
-  <div class="image-container">
-    <img src="image.jpg" alt="Image Description">
-  </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 
 
 
-css style
+<body>
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-}
+    <div class="container-fluid ">
+    <div class="d-flex flex-wrap justify-content-start">
+        {% for blog in page_obj %}
+         <div class="clearfix">
+            <div class="center">
+                <div class="card shadow col-48 col-md-12 col-lg-8 mb-8">
+                    <div class="row g-0">
+                        <div class="col-md-8">
+                            <div class="card-body d-flex flex-column h-100">
+                                <h5 class="card-title custom-card-title">
+                                    <a href="{% url 'blogdetail' blog.slug %}">{{blog.blog_title}}</a>
+                                </h5>
 
-.text-container {
-  flex: 1 1 100%;
-  padding: 20px;
-}
+                                <div class="mt-auto">
+                                    <p class="card-text">Author :{{blog.user.first_name}} {{blog.user.last_name}}
+                                        posted
+                                        on
 
-.image-container {
-  flex: 1 1 100%;
-  padding: 20px;
-  text-align: center;
-}
 
-.image-container img {
-  max-width: 100%;
-  height: auto;
-}
+                                        {{blog.user.date_joined}}.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <img src="{{ blog.image.url }}" class="card-img-right" alt="..."
+                                style="width: 100%; height: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 
-@media screen and (min-width: 768px) {
-  .text-container {
-    flex: 1 1 50%;
-  }
- 
-  .image-container {
-    flex: 1 1 50%;
-  }
-}
+    {% endfor%}
+
+    <br><br>
+
+
+
+
+</body>
+{% endblock content%}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %}</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+
+    {% load static %}
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="../static/assets/img/favicon.png" />
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="../static/assets/css/bootstrap.min.css"/> -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+
+
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}" />
+
+    <!-- Lineawesome CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/line-awesome.min.css' %}" />
+
+    <!-- Chart CSS -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/morris/morris.css' %}">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+
+    <!-- Common JavaScript files -->
+
+    </script>
+</head>
+
+<body>
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+
+        <!-- Header -->
+        <div class="header">
+
+
+
+            <!-- Header Title -->
+            <div class="page-title-box">
+                <h3>Blog Management System</h3>
+            </div><br><br>
+            <!-- /Header Title -->
+
+            <!-- Header Menu -->
+
+            
+            <!-- /Header Menu -->
+           
+            
+      
+
+
+        </div>
+        <!-- /Header -->
+
+
+        <br><br> <br>
+
+        {% block content %}
+
+
+
+
+
+        {% endblock content %}
+        
+        <!-- MDB -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+        <!--Datatable plugin JS library file -->
+        <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.js"></script>
+        <script type="text/javascript">
+            let table = new DataTable('#myTable');
+        </script>
+        <!--Durga sir's Recommendation -->
+        <script src="{% static 'assets/js/jquery-3.5.1.min.js' %}"></script>
+
+        <!-- Bootstrap Core JS -->
+        <script src="{% static 'assets/js/popper.min.js' %}"></script>
+        <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+
+        <!-- Slimscroll JS -->
+        <script src="{% static 'assets/js/jquery.slimscroll.min.js' %}"></script>
+
+        <!-- Chart JS -->
+        <script src="{% static 'assets/plugins/morris/morris.min.js' %}"></script>
+        <script src="{% static 'assets/plugins/raphael/raphael.min.js' %}"></script>
+        <script src="{% static 'assets/js/chart.js' %}"></script>
+
+        <!-- Custom JS -->
+        <script src="{% static 'assets/js/app.js' %}"></script>
+        <!--Durga sir's Recommendation -->
+
+</body>
+
+</html>

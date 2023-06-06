@@ -41,10 +41,16 @@
                     <label class="col-form-label col-md-2">Blog description:
                     </label>
                     <div class="col-md-10">
+                        {{form.media }}
                         {{ form.blog_description| add_class:'form-control' }}
                     </div>
                 </div>
-              
+                <div>
+                    <label for="formFileLg" class="form-label">Choose Image </label>
+                    <input class="form-control form-control-lg" id="formFileLg" type="file"
+                        name="image">
+                    <br><br><br>
+                </div>
 
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">Update</button>
@@ -52,6 +58,9 @@
                 
 
                 </div>
+                <div class="col-auto float-right ml-auto">
+                    <a type="action" href="{% url 'userblog' %}" class="btn btn-primary"> Go back</a>
+                    </div>
     </div>
     </form>
     </li>
@@ -62,4 +71,3 @@
 </div>
 
 </html>
-<!-- this changes -->
