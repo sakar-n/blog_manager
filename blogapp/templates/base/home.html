@@ -47,7 +47,10 @@
         padding: 20px;
         color: #4b8add;
     }
-
+    .centerrr {
+        text-align: center;
+       
+      }
 
     .pagination {
         display: flex;
@@ -94,18 +97,18 @@
 {% else %}     
     <a href="{% url 'login' %}" class="btn btn-primary mt-4 right">LOGIN</a><br><br>
     <a href="{% url 'signup' %}" class="btn btn-primary mt-4 right">Register</a>
-    </div>
-</div>
+</form><br><br>
 {% endif %}
 
 
 <div class="card-container">
     <div class="center">
-        <div class="card" style="width: 70rem; height: 7rem;">
+        <div class="container mb-5" style="width: 60rem; height: 6rem;">
             <div class="main">
-                <div class=" card-body">
+                <div class="centerrr">
                     <h1>BLOGS</h1><br>
-                    <div class="d-flex  justify-content-end ">
+                </div>
+                    <div class="d-flex  justify-content-center ">
                         <div class="btn-group" role="group" aria-label="Basic example">
                             {% if page_obj.has_previous %}
                             <a class="flex-item btn btn-info" href="?page=1">first</a>
@@ -124,9 +127,10 @@
                                 &raquo;</a><br><br>
                             {% endif %}
                         </div>
+                        
 
                     </div>
-                </div>
+                
 
             </div>
         </div>
@@ -136,16 +140,50 @@
 
 </div>
 
+<div class="row d-flex justify-content-center mt-4">
+{% for blog in page_obj %}
+
+ 
+        <div class="col-8">
+            <div class="card">
+            <div class="row">
+              
+                <div class="col-8">
+                   
+                    <div class="card-body d-flex flex-column h-100">
+                        <h5 class="card-title custom-card-title">
+                            <a href="{% url 'blogdetail' blog.slug %}">{{blog.blog_title}}</a>
+                        </h5>
+
+                        <div class="mt-auto">
+                            <p class="card-text">Author :{{blog.user.first_name}} {{blog.user.last_name}}
+                                posted
+                                on
+                                {{blog.created_at|naturaltime}}.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <img src="{{ blog.image.url }}" class="card-img-right" alt="..."
+                    style="width: 100%; height: 100%;">
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-<body>
 
-    <div class="container-fluid ">
+{% endfor%}
+</div>
+
+{% comment %} 
+<div class="clearfix">
     <div class="d-flex flex-wrap justify-content-start">
         {% for blog in page_obj %}
-         <div class="clearfix">
-            <div class="center">
-                <div class="card shadow col-48 col-md-12 col-lg-8 mb-8">
+       
+            <div class="center d-flex justify-content-center">
+                <div class="card shadow mb-8">
                     <div class="row g-0">
                         <div class="col-md-8">
                             <div class="card-body d-flex flex-column h-100">
@@ -167,12 +205,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+           
         </div>
     </div>
-    </div>
+</div>
 
-    {% endfor%}
+    {% endfor%} {% endcomment %}
 
     <br><br>
 

@@ -1,18 +1,5 @@
 <!doctype html>
 <html lang="en">
-<style>
-    .center {
-        margin: auto;
-        width: 50%;
-
-        padding: 10px;
-    }
-
-    .centert {
-        text-align: center;
-
-    }
-</style>
 
 <head>
     <meta charset="utf-8">
@@ -57,22 +44,23 @@
         <!-- Header -->
         <div class="header">
 
+            <br>
 
-
-            <!-- Header Title -->
-            <div class="centert">
-
-                <div class="page-title-box">
-                    <h3>Blog management System</h3>
-                </div>
+                
+                    <h3 style="color:blue;" class="px-3"><i>Blog management System</h3>
+               
             </div>
 
+            <!-- Header Title -->
+            <div class="page-title-box">
+                <h3>{{ companyname }} {{ user.first_name }}</h3>
+            </div>
             <!-- /Header Title -->
 
             <!-- Header Menu -->
             <ul class="nav user-menu">
 
-                
+
 
 
                 <li class="nav-item dropdown has-arrow main-drop">
@@ -81,34 +69,19 @@
                             <span class="status online"></span></span>
                         <span>{{ companyname }}</span>
                     </a>
-
                     <div class="dropdown-menu">
 
-                        <form action="{% url 'login' %}" method="post">
+                        <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
-                            <button type="submit" class="dropdown-item">login</button>
-                            <form action="{% url 'home' %}">
+                            <button type="submit" class="dropdown-item">logout</button>
+                            <form action="{% url 'logout' %}" method="post">
                                 {% csrf_token %}
-                                <button type="submit" class="dropdown-item">Register</button>
+                                <button type="submit" class="dropdown-item">Signup</button>
                             </form>
-
                     </div>
                 </li>
             </ul>
-            
-            <!-- /Header Menu -->
 
-            <!-- Mobile Menu -->
-            <div class="dropdown mobile-user-menu">
-                <!-- <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i
-                        class="fa fa-ellipsis-v"></i></a> -->
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="www.example.com">Settings</a>
-                    <a class="dropdown-item" href="{% url 'logout'%}">Logout</a>
-                </div>
-            </div>
-
-            <!-- /Mobile Menu -->
 
         </div>
         <!-- /Header -->
