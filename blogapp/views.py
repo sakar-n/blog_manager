@@ -16,7 +16,7 @@ from django.utils.decorators import method_decorator
 # Create your views here.
 
 
-@method_decorator(csrf_protect, name='dispatch')
+
 class Registeruser(View):
     def get(self, request):
    
@@ -31,7 +31,7 @@ class Registeruser(View):
         return render(request, "base/signup.html", {"form": fm})
         
 
-@method_decorator(csrf_protect, name='dispatch')
+
 class Loginpage(View):
     def get(self, request):
         fm = AuthenticationForm()
@@ -50,14 +50,13 @@ class Loginpage(View):
             login(request, user)
             return redirect("userblog")
         else:
-            messages.info(request, "Email or password is incorrect")
-        return render(request, "base/login.html", {"form": form})
+            return render(request, "base/login.html", {"form": form})
 
 
-class Logoutuser(View):
-    def post(self, request):
+class Logoutuser(LoginRequiredMixin, View):
+    def get(self, request):
         logout(request)
-        return redirect("home")
+        return redirect('home')
 
 
 
@@ -137,7 +136,7 @@ class Homepage(View):
         
         obj = Blogmodels.objects.all()
         
-        paginator = Paginator(obj,2)
+        paginator = Paginator(obj,3)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         
@@ -164,7 +163,7 @@ class Blogdelete(LoginRequiredMixin,View):
         
         if request.user == obj.user:
             obj.delete()
-            messages.success(request,("Blog has been deleted"))
+            messages.error(request,("Blog has been deleted"))
             
             return redirect('userblog')
         else:

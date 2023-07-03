@@ -1,7 +1,8 @@
-{% extends 'base/uuubase.html' %}
+{% extends user.is_authenticated|yesno:"base/yybase.html,base/uuubase.html" %}
 {% block content %}
 {% load static %}
 {% load humanize %}
+{% load widget_tweaks %}
 <style>
     .clearfix::after {
         content: "";
@@ -73,7 +74,7 @@
         font-size: 70px;
 
 
-        color: #4b8add;
+        color: #050505;
     }
 
     .main {
@@ -84,20 +85,13 @@
 
         padding-right: 10px;
     }
-    .page-title-box{
-        background:red;
-        padding:10px;
-        color:white;
-    }
+
 </style>
 {% if user.is_authenticated %}
-<form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary mt-4 right">logout</button>
+    <a  class="btn btn-primary mt-4 right" href="{% url 'logout' %}">logout</a>
 {% else %}     
     <a href="{% url 'login' %}" class="btn btn-primary mt-4 right">LOGIN</a><br><br>
     <a href="{% url 'signup' %}" class="btn btn-primary mt-4 right">Register</a>
-</form><br><br>
 {% endif %}
 
 
@@ -140,84 +134,145 @@
 
 </div>
 
-<div class="row d-flex justify-content-center mt-4">
-{% for blog in page_obj %}
 
- 
-        <div class="col-8">
-            <div class="card">
-            <div class="row">
-              
-                <div class="col-8">
-                   
-                    <div class="card-body d-flex flex-column h-100">
-                        <h5 class="card-title custom-card-title">
-                            <a href="{% url 'blogdetail' blog.slug %}">{{blog.blog_title}}</a>
-                        </h5>
 
-                        <div class="mt-auto">
-                            <p class="card-text">Author :{{blog.user.first_name}} {{blog.user.last_name}}
-                                posted
-                                on
-                                {{blog.created_at|naturaltime}}.</p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-4">
-                    <img src="{{ blog.image.url }}" class="card-img-right" alt="..."
-                    style="width: 100%; height: 100%;">
-                </div>
-            </div>
+<div class="container">
+    {% for blog in page_obj %}
+    <div class="card">
+      <div class="card__header">
+        <img  src="{{ blog.image.url }}" alt="card__image" class="card__image" width="600" height="300">
+      </div>
+      <div class="card__body">
+                <h4> <a href="{% url 'blogdetail' blog.slug %}">{{blog.blog_title}}</a></h4>
+        <p>{{blog.blog_description|safe}}</p>
+      </div>
+      <div class="card__footer">
+        <div class="user">
+          <div class="user__info">
+            <h5><p class="card-text">Author :{{blog.user.first_name}} {{blog.user.last_name}}
+               </p></h5>
+            <small>{{blog.created_at|naturaltime}}</small>
+          </div>
         </div>
-    </div>
+      </div>
+    </div>  
+  {% endfor%}
+
+
+<style>
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background: #7f7fd5;
+  background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin-block: 2rem;
+  gap: 2rem;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: clamp(20rem, calc(20rem + 2vw), 22rem);
+  overflow: hidden;
+  box-shadow: 0 .1rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 1em;
+  background: #ECE9E6;
+background: linear-gradient(to right, #FFFFFF, #ECE9E6);
+
+}
 
 
 
-{% endfor%}
-</div>
-
-{% comment %} 
-<div class="clearfix">
-    <div class="d-flex flex-wrap justify-content-start">
-        {% for blog in page_obj %}
-       
-            <div class="center d-flex justify-content-center">
-                <div class="card shadow mb-8">
-                    <div class="row g-0">
-                        <div class="col-md-8">
-                            <div class="card-body d-flex flex-column h-100">
-                                <h5 class="card-title custom-card-title">
-                                    <a href="{% url 'blogdetail' blog.slug %}">{{blog.blog_title}}</a>
-                                </h5>
-
-                                <div class="mt-auto">
-                                    <p class="card-text">Author :{{blog.user.first_name}} {{blog.user.last_name}}
-                                        posted
-                                        on
-                                        {{blog.created_at|naturaltime}}.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <img src="{{ blog.image.url }}" class="card-img-right" alt="..."
-                                style="width: 100%; height: 100%;">
-                        </div>
-                    </div>
-                </div>
-           
-        </div>
-    </div>
-</div>
-
-    {% endfor%} {% endcomment %}
-
-    <br><br>
+.card__body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
 
 
+.tag {
+  align-self: flex-start;
+  padding: .25em .75em;
+  border-radius: 1em;
+  font-size: .75rem;
+}
+
+.tag + .tag {
+  margin-left: .5em;
+}
+
+.tag-blue {
+  background: #56CCF2;
+background: linear-gradient(to bottom, #2F80ED, #56CCF2);
+  color: #fafafa;
+}
+
+.tag-brown {
+  background: #D1913C;
+background: linear-gradient(to bottom, #FFD194, #D1913C);
+  color: #fafafa;
+}
+
+.tag-red {
+  background: #cb2d3e;
+background: linear-gradient(to bottom, #ef473a, #cb2d3e);
+  color: #fafafa;
+}
+
+.card__body h4 {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+}
+
+.card__footer {
+  display: flex;
+  padding: 1rem;
+  margin-top: auto;
+}
+
+.user {
+  display: flex;
+  gap: .5rem;
+}
+
+.user__image {
+  border-radius: 50%;
+}
+
+.user__info > small {
+  color: #666;
+}  
+</style>
 
 
-</body>
 {% endblock content%}
 
 

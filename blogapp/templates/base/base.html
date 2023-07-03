@@ -68,12 +68,9 @@
 
                     <div class="dropdown-menu">
 
-                        <form action="{% url 'logout' %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="dropdown-item">logout</button>
-                            <form action="{% url 'home' %}">
-                                {% csrf_token %}
-                                <button type="submit" class="dropdown-item">Home</button>
+                        
+                            <a type="submit" class="dropdown-item" href="{% url 'logout' %}">logout</a>
+                                <a type="submit" class="dropdown-item" href="{% url 'home' %}">Home</a>
                             </form>
 
                     </div>
@@ -82,13 +79,16 @@
 
             <!-- /Header Menu -->
 
-
-
         </div>
         <!-- /Header -->
-
-
-        <br><br> <br>
+<br><br>
+<br>
+<br>
+        {% for message in messages %}
+        <div id="message" class="alert {{ message.tags }} alert-dismissible" role="alert">
+         <div> {{ message }} </div>
+        </div>
+       {% endfor %}
 
         {% block content %}
 
@@ -124,6 +124,11 @@
 
         <!-- Custom JS -->
         <script src="{% static 'assets/js/app.js' %}"></script>
+        <script>
+            var a = $('#message')
+            $(a).css("z-index","1000")
+            $(a).fadeOut(5000)
+        </script>
         <!--Durga sir's Recommendation -->
 
 </body>

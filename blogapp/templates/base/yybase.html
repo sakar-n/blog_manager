@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
 
@@ -40,7 +42,7 @@
 <body>
     <!-- Main Wrapper -->
     <div class="main-wrapper">
-       
+
         <!-- Header -->
         <div class="header">
 
@@ -55,38 +57,46 @@
             <!-- Header Menu -->
 
             <ul class="nav user-menu">
+               
 
-                <li class="page-title-box">
-                    <h3>Hello,  {{request.user.first_name}}</h3>       
-                </li>
-                <li class="nav-item dropdown has-arrow main-drop">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <span class="user-img"><img src="../static/assets/img/profiles/avatar-21.jpg" alt="">
-                            <span class="status online"></span></span>
-                       
-                    </a>
-
-                    <div class="dropdown-menu">
-
-                        
+                    <li class="page-title-box">
+                        <h3>Hello,  {{request.user.first_name}}</h3>       
+                    </li>
+        
+                    <li class="nav-item dropdown has-arrow main-drop">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <span class="user-img"><img src="../static/assets/img/profiles/avatar-21.jpg" alt="">
+                                <span class="status online"></span></span>
+                           
+                        </a>
+    
+                        <div class="dropdown-menu">
+    
                             
-                                <a type="submit" class="dropdown-item" href="{% url 'userblog' %}"> Your Blogs</a>
-                            </form>
+                                
+                                    <a type="submit" class="dropdown-item" href="{% url 'userblog' %}"> Your Blogs</a>
+                                </form>
+    
+                        </div>
+                    </li>
 
-                    </div>
-                </li>
-            </ul>
-          
 
+
+                   
                 
 
 
+               
+                        
+                         
+                       
+            
 
+            </ul>
 
-              
             <!-- /Header Menu -->
 
-
+        </div>
         <!-- /Header -->
 
 
@@ -126,10 +136,7 @@
 
         <!-- Custom JS -->
         <script src="{% static 'assets/js/app.js' %}"></script>
-       
-
-       
-        </script>
+        <!--Durga sir's Recommendation -->
 
 </body>
 

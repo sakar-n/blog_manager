@@ -34,7 +34,7 @@
 
     <!-- Common JavaScript files -->
 
-    </script>
+   
 </head>
 
 <body>
@@ -44,44 +44,36 @@
         <!-- Header -->
         <div class="header">
 
-            <br>
 
-                
-                    <h3 style="color:blue;" class="px-3"><i>Blog management System</h3>
-               
-            </div>
 
             <!-- Header Title -->
             <div class="page-title-box">
-                <h3>{{ companyname }} {{ user.first_name }}</h3>
+                <h3>Blog Management System</h3>
             </div>
             <!-- /Header Title -->
 
             <!-- Header Menu -->
+
             <ul class="nav user-menu">
 
+                
 
 
 
-                <li class="nav-item dropdown has-arrow main-drop">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <span class="user-img"><img src="../static/assets/img/profiles/avatar-21.jpg" alt="">
-                            <span class="status online"></span></span>
-                        <span>{{ companyname }}</span>
-                    </a>
-                    <div class="dropdown-menu">
 
-                        <form action="{% url 'logout' %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="dropdown-item">logout</button>
-                            <form action="{% url 'logout' %}" method="post">
-                                {% csrf_token %}
-                                <button type="submit" class="dropdown-item">Signup</button>
-                            </form>
-                    </div>
-                </li>
+                   
+                </ul>
+
+
+               
+                        
+                         
+                       
+            
+
             </ul>
 
+            <!-- /Header Menu -->
 
         </div>
         <!-- /Header -->
@@ -93,9 +85,9 @@
 
 
 
+
+
         {% endblock content %}
-
-
         <!-- MDB -->
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 

@@ -1,5 +1,7 @@
 {% extends 'base/loginbase.html' %}
 {% block content %}
+{% load crispy_forms_tags %}
+
 
 <style>
     .center {
@@ -11,47 +13,72 @@
 </style>
 
 
-
 <div class="account-box">
     <div class="account-wrapper">
         <h3 class="account-title">Login</h3>
         <p class="account-subtitle">Access to our dashboard</p>
 
         <!-- Account Form -->
-        <form action="" method="post">
-            <div class="form-group">
-                <div class="mb-3" class="form-control" type="text">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                </div>
 
+        <form action="" method="post" class="needs-validation" novalidate>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input class="form-control" type="text" id="username" name="username" placeholder="Username" required>
+                <div class="invalid-feedback">Please enter your username.</div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control" type="password" id="password" name="password" placeholder="Password" required>
                 <div class="col-auto">
+                    <div class="text-danger">
+                    {% if form.errors %}
+                    {% for field in form %}
+                    {% for error in field.errors %}
+                    {{ error|escape }}
+                    {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                    {{ error|escape }}
+                    {% endfor %}
+                    {% endif %}
+                    <div>
                     <a class="text-muted" href="{% url 'reset_password' %}">
                         Forgot password?
                     </a>
                 </div>
+                <div class="invalid-feedback">Please enter your password.</div>
             </div>
+            <div class="form-group text-center">
+                <button class="btn btn-primary account-btn" type="submit">Login</button>
+            </div>
+            <div class="account-footer">
+                <p>Don't have an account yet? <a href="{% url 'signup' %}">Register</a></p>
+            </div>
+        </form>
 
     </div>
-    <div class="form-group text-center">
-        <button class="btn btn-success" type="submit" value="login">Login</button>
-    </div>
-    <div class="account-footer">
-
-    </div>
-    </form>
-    <div class="center">
-        <p>Don't have an account yet? <a href="{% url 'signup' %}">Register</a></p>
-    </div>
-    <!-- /Account Form -->
-
-</div>
-</div>
-</div>
-</div>
 </div>
 
-
-
+<script>
+    // JavaScript to enable form validation
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 
 {% endblock content %}
